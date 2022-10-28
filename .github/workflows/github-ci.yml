@@ -1,5 +1,5 @@
 name: CI
-run-name: ${{ github.actor }} push | pull_request
+run-name: ${{ github.actor }} push
 
 on: push
 jobs:
@@ -22,7 +22,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/pipelines'
     steps:
       - name: Deploy app
         run: exit 0
