@@ -1,13 +1,21 @@
 name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{ github.actor }} created or edited a pull request
 on: [push, pull_request]
 jobs:
-  check-bats-version:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-      - run: npm install -g bats
-      - run: bats -v
+
+      - name: install
+        run: npm install
+
+      - name: prettier
+        run: npm run prettier
+
+      - name: test
+        run: npm run test
+
+      - name: build
+        run: npm run build
