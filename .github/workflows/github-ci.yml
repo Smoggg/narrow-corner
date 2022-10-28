@@ -34,5 +34,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish on GitHub Pages
-        run: npm run deploy
+      - name: Deploy
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}    
+          npm run deploy
