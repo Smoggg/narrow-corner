@@ -1,0 +1,23 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} created or edited a pull request
+on: 
+  push:
+    pipelines
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install
+        run: npm install
+
+      - name: prettier
+        run: npm run prettier
+
+      - name: test
+        run: npm run test
+
+      - name: build
+        run: npm run build
