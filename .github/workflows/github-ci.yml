@@ -12,7 +12,7 @@ jobs:
         run: npm install
 
       - name: prettier
-        run: npm run prettier
+        run: npx prettier --check .
 
       - name: test
         run: npm run test
