@@ -1,5 +1,6 @@
 import React from "react";
-import "./button.css";
+
+export type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps {
   /**
@@ -7,17 +8,17 @@ interface ButtonProps {
    */
   primary?: boolean;
   /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
    * How large should the button be?
    */
-  size?: "small" | "medium" | "large";
+  size?: ButtonSize;
   /**
    * Button contents
    */
   label: string;
+  /**
+   * Is this button disabled?
+   */
+  disabled?: boolean;
   /**
    * Optional click handler
    */
@@ -30,22 +31,30 @@ interface ButtonProps {
 export const Button = ({
   primary = false,
   size = "medium",
-  backgroundColor,
   label,
+  disabled = false,
   ...props
 }: ButtonProps) => {
+  const styles = ["font-bold", "rounded"];
+
   const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
+    ? "bg-blue-500 hover:bg-blue-400"
+    : "bg-gray-300 hover:bg-gray-200";
+
+  disabled
+    ? styles.push("bg-gray-100 text-gray-300 border border-gray-300")
+    : styles.push(mode);
+
+  const sizes = {
+    small: "text-lg",
+    medium: "text-xl",
+    large: "text-2xl",
+  };
+
+  if (size) styles.push(sizes[size]);
+
   return (
-    <button
-      type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
-        " "
-      )}
-      style={{ backgroundColor }}
-      {...props}
-    >
+    <button type="button" className={styles.join(" ")} {...props}>
       {label}
     </button>
   );

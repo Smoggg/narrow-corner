@@ -1,52 +1,17 @@
 import React from "react";
-import Logo from "../icons/Logo";
-
-import { Button } from "./Button";
-import "./header.css";
-
-type User = {
-  name: string;
-};
+import { Icon, IconKeys } from "./Icon";
 
 interface HeaderProps {
-  user?: User;
-  onLogin: () => void;
-  onLogout: () => void;
-  onCreateAccount: () => void;
+  logo?: IconKeys;
+  title?: string;
 }
 
-export const Header = ({
-  user,
-  onLogin,
-  onLogout,
-  onCreateAccount,
-}: HeaderProps) => (
+export const Header = ({ logo, title }: HeaderProps) => (
   <header>
-    <div className="wrapper">
+    <div className="px-3 flex items-center justify-between py-1.5 border-b-8 border-black">
       <div>
-        
-          <Logo />
-        <h1>Acme</h1>
-      </div>
-      <div>
-        {user ? (
-          <>
-            <span className="welcome">
-              Welcome, <b>{user.name}</b>!
-            </span>
-            <Button size="small" onClick={onLogout} label="Log out" />
-          </>
-        ) : (
-          <>
-            <Button size="small" onClick={onLogin} label="Log in" />
-            <Button
-              primary
-              size="small"
-              onClick={onCreateAccount}
-              label="Sign up"
-            />
-          </>
-        )}
+        {logo && <Icon iconKey={logo} className="w-8 h-8 inline-block" />}{" "}
+        <h1 className="align-middle inline-block font-black">{title}</h1>
       </div>
     </div>
   </header>
